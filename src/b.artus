@@ -1,0 +1,12 @@
+include "a.artus"
+
+import std.gpr
+
+type(x86, x64) int64(8): std.gpr {
+    rax overlaps "rax", "eax", "ax", "al", "ah"
+    rbx overlaps "rbx", "ebx", "bx", "bl", "bh"
+    rcx overlaps "rcx", "ecx", "cx", "cl", "ch"
+    rdx overlaps "rdx", "edx", "dx", "dl", "dh"
+    rsi overlaps "rsi", "esi", "si", "sil"
+    rdi overlaps "rdi", "edi", "di", "dil"
+}

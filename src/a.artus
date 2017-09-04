@@ -1,0 +1,85 @@
+include "b.artus"
+
+namespace lol.yolo {
+    add(inout std.int8 a, in std.int8 b) {
+        mov a, b
+    }
+
+    type(x86) int16(2): std.gpr {
+        ax overlaps "al", "ah"
+        bx overlaps "bl", "bh"
+        cx overlaps "cl", "ch"
+        dx overlaps "dl", "dh"
+        si overlaps "sil"
+        di overlaps "dil"
+    }
+}
+
+/// yoloe
+namespace std {
+
+    native(x86) <T: gpr> add(inout T a, const in T b)
+    .text
+        "add $a, $b"
+
+    native(x86) <T: gpr> zero(out T a)
+    .text
+        "xor $a, $a"
+
+    native(x86) <T: gpr> set(out T a, const in T b)
+    .text
+        "mov $a, $b"
+
+    native(x86) <T: gpr> set(out T a, const in imm b)
+    .text
+        "mov $a, $b"
+
+    <T> stubGeneric(inout T a, const in T b) {
+        c: T;
+        d: T;
+        e: lol.yolo.int16;
+
+        set c, a
+        set d, b
+        add c, d
+        set a, c
+    }
+
+    entrypoint yay() {
+        a: int64;
+        b: int64;
+
+        zero a
+        set b, 70
+        add a, b
+        stubGeneric a, b
+    }
+
+    namespace yolo {
+    }
+
+    type(x86) int32(4): gpr {
+        eax overlaps "ax", "al", "ah"
+        ebx overlaps "bx", "bl", "bh"
+        ecx overlaps "cx", "cl", "ch"
+        edx overlaps "dx", "dl", "dh"
+        esi overlaps "si", "sil"
+        edi overlaps "di", "dil"
+    }
+
+    type(x86) int8(1): gpr {
+        al
+        ah
+        cl
+        ch
+        dl
+        dh
+        bl
+        bh
+        sil
+        dil
+    }
+
+    abstract type gpr
+
+}
