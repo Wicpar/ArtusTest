@@ -4,12 +4,12 @@ import std.gpr
 import std.zero
 
 type(x86, x64) int64(8): gpr {
-    rax !: "rax", "eax", "ax", "al", "ah"
-    rbx !: "rbx", "ebx", "bx", "bl", "bh"
-    rcx !: "rcx", "ecx", "cx", "cl", "ch"
-    rdx !: "rdx", "edx", "dx", "dl", "dh"
-    rsi !: "rsi", "esi", "si", "sil"
-    rdi !: "rdi", "edi", "di", "dil"
+    rax !: rax, eax, ax, al, ah
+    rbx !: rbx, ebx, bx, bl, bh
+    rcx !: rcx, ecx, cx, cl, ch
+    rdx !: rdx, edx, dx, dl, dh
+    rsi !: rsi, esi, si, sil
+    rdi !: rdi, edi, di, dil
 
     constructor(inout int64 this) {
         zero this
