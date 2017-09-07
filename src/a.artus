@@ -6,12 +6,12 @@ namespace lol.yolo {
     }
 
     type(x86) int16(2): std.gpr {
-        ax overlaps "al", "ah"
-        bx overlaps "bl", "bh"
-        cx overlaps "cl", "ch"
-        dx overlaps "dl", "dh"
-        si overlaps "sil"
-        di overlaps "dil"
+        ax !: "al", "ah"
+        bx !: "bl", "bh"
+        cx !: "cl", "ch"
+        dx !: "dl", "dh"
+        si !: "sil"
+        di !: "dil"
     }
 }
 
@@ -33,6 +33,15 @@ namespace std {
     native(x86) <T: gpr> set(out T a, const in imm b)
     .text
         "mov $a, $b"
+
+
+    native(x86) <T: gpr> push(inout T a)
+    .text
+        "push $a"
+
+    native(x86) <T: gpr> pop(inout T a)
+    .text
+        "pop $a"
 
     <T> stubGeneric(inout T a, const in T b) {
         c: T;
@@ -59,12 +68,12 @@ namespace std {
     }
 
     type(x86) int32(4): gpr {
-        eax overlaps "ax", "al", "ah"
-        ebx overlaps "bx", "bl", "bh"
-        ecx overlaps "cx", "cl", "ch"
-        edx overlaps "dx", "dl", "dh"
-        esi overlaps "si", "sil"
-        edi overlaps "di", "dil"
+        eax !: "ax", "al", "ah"
+        ebx !: "bx", "bl", "bh"
+        ecx !: "cx", "cl", "ch"
+        edx !: "dx", "dl", "dh"
+        esi !: "si", "sil"
+        edi !: "di", "dil"
     }
 
     type(x86) int8(1): gpr {

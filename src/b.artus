@@ -1,12 +1,30 @@
 include "a.artus"
 
 import std.gpr
+import std.zero
 
-type(x86, x64) int64(8): std.gpr {
-    rax overlaps "rax", "eax", "ax", "al", "ah"
-    rbx overlaps "rbx", "ebx", "bx", "bl", "bh"
-    rcx overlaps "rcx", "ecx", "cx", "cl", "ch"
-    rdx overlaps "rdx", "edx", "dx", "dl", "dh"
-    rsi overlaps "rsi", "esi", "si", "sil"
-    rdi overlaps "rdi", "edi", "di", "dil"
+type(x86, x64) int64(8): gpr {
+    rax !: "rax", "eax", "ax", "al", "ah"
+    rbx !: "rbx", "ebx", "bx", "bl", "bh"
+    rcx !: "rcx", "ecx", "cx", "cl", "ch"
+    rdx !: "rdx", "edx", "dx", "dl", "dh"
+    rsi !: "rsi", "esi", "si", "sil"
+    rdi !: "rdi", "edi", "di", "dil"
+
+    constructor(inout int64 this) {
+        zero this
+    }
+
+    push(inout int64 this) {
+        std.push this
+    }
+
+    pop(inout int64 this) {
+        std.pop this
+    }
+
+    destructor(inout int64 this) {
+        std.set this, 1000
+    }
+
 }
