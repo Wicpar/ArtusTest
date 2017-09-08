@@ -1,49 +1,49 @@
 include "b.artus"
 
 namespace lol.yolo {
-    add(inout std.int8 a, in std.int8 b) {
+    add(inout a: std.int8, in b :std.int8) {
         mov a, b
     }
 
     type(x86) int16(2): std.gpr {
-        ax !: "al", "ah"
-        bx !: "bl", "bh"
-        cx !: "cl", "ch"
-        dx !: "dl", "dh"
-        si !: "sil"
-        di !: "dil"
+        ax !: al, ah
+        bx !: bl, bh
+        cx !: cl, ch
+        dx !: dl, dh
+        si !: sil
+        di !: dil
     }
 }
 
 /// yoloe
 namespace std {
 
-    native(x86) <T: gpr> add(inout T a, const in T b)
+    native(x86) <T: gpr> add(inout a: T, const in b: T)
     .text
         "add $a, $b"
 
-    native(x86) <T: gpr> zero(out T a)
+    native(x86) <T: gpr> zero(out a: T)
     .text
         "xor $a, $a"
 
-    native(x86) <T: gpr> set(out T a, const in T b)
+    native(x86) <T: gpr> set(out a: T, const in b: T)
     .text
         "mov $a, $b"
 
-    native(x86) <T: gpr> set(out T a, const in imm b)
+    native(x86) <T: gpr> set(out a: T, const in b: imm)
     .text
         "mov $a, $b"
 
 
-    native(x86) <T: gpr> push(inout T a)
+    native(x86) <T: gpr> push(inout a: T)
     .text
         "push $a"
 
-    native(x86) <T: gpr> pop(inout T a)
+    native(x86) <T: gpr> pop(inout a: T)
     .text
         "pop $a"
 
-    <T> stubGeneric(inout T a, const in T b) {
+    <T> stubGeneric(inout a: T, const in b: T) {
         c: T;
         d: T;
         e: lol.yolo.int16;
@@ -68,12 +68,12 @@ namespace std {
     }
 
     type(x86) int32(4): gpr {
-        eax !: "ax", "al", "ah"
-        ebx !: "bx", "bl", "bh"
-        ecx !: "cx", "cl", "ch"
-        edx !: "dx", "dl", "dh"
-        esi !: "si", "sil"
-        edi !: "di", "dil"
+        eax !: ax, al, ah
+        ebx !: bx, bl, bh
+        ecx !: cx, cl, ch
+        edx !: dx, dl, dh
+        esi !: si, sil
+        edi !: di, dil
     }
 
     type(x86) int8(1): gpr {
@@ -92,3 +92,5 @@ namespace std {
     abstract type gpr
 
 }
+
+namespace std {}

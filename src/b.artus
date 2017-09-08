@@ -11,19 +11,19 @@ type(x86, x64) int64(8): gpr {
     rsi !: rsi, esi, si, sil
     rdi !: rdi, edi, di, dil
 
-    constructor(inout int64 this) {
+    constructor(inout this: int64) {
         zero this
     }
 
-    push(inout int64 this) {
+    push(inout this: int64) {
         std.push this
     }
 
-    pop(inout int64 this) {
+    pop(inout this: int64) {
         std.pop this
     }
 
-    destructor(inout int64 this) {
+    destructor(inout this: int64) {
         std.set this, 1000
     }
 
